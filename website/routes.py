@@ -26,9 +26,11 @@ def split_by_crlf(s):
 def home():
     if request.method == 'POST':
         username = request.form.get('username')
+        if username != 'xiaozhun':
+            return redirect('/')
         user = User.query.filter_by(username=username).first()
         if not user:
-            user = User(username=username)
+            user = User(username='xiaozhun')
             db.session.add(user)
             db.session.commit()
         session['id'] = user.id
